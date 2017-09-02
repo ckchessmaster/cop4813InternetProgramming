@@ -1,0 +1,75 @@
+p {
+  font-family:sans-serif;
+  color:white;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: sans-serif;
+}
+
+body {
+  margin:10px;
+  background-image:url("content/images/dark-triangles.png");
+  background-color: cccccc;
+  background-repeat: repeat-xy;
+  color:white;
+  font-family: sans-serif;
+}
+
+hr {
+  border-color: white;
+}
+
+ul {
+  list-style-type:square;
+}
+
+table {
+  border: white;
+}
+
+a:link {
+  color:orange;
+}
+
+a:visited {
+  color:orange;
+}
+
+a:hover {
+  color:orange;
+  background-color: grey;
+}
+
+.menu {
+  background-color: grey;
+  font-size: 20px;
+
+}
+
+.menu a {
+  padding: 0px 5px 0px 5px;
+  border-right: 2px solid white;
+  text-decoration: none;
+}
+
+.menu a:hover {
+  color: white;
+  background-color: orange;
+}
+
+.center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.assign1 table, th, td, th {
+  border: 1px solid;
+  padding: 10px;
+}
+
+.assign1 .main {
+  float:left;
+  width:65%;
+}
