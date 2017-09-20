@@ -2,19 +2,15 @@
 <html>
 <head>
 <script>
-function validtateForm() {
-  var x = document.forms["myForm"]["fname"].value;
-  if (x == "") {
-    alert("Name must be filled out");
-    return false;
-  }
+function myFunction() {
+  var rawr = document.getElementsByName('test1');
+  alert(rawr[0].checked);
 }
 </script>
 </head>
 <body>
-  <form name="myForm" onsubmit="return validtateForm()" method="post">
-    Name: <input type="text" name="fname" />
-    <input type="submit" value="Submit" />    
-  </form>
+  Checkbox <input type="radio" name="test1" id="testing" value="1" />
+  Checkbox <input type="radio" name="test1" id="testing2" value="2" />
+  <button type="button" onclick="myFunction()">Button</button>
 </body>
 </html>

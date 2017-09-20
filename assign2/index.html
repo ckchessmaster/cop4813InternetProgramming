@@ -8,7 +8,11 @@
     function validateForm() {
       var formValid = true;
 
-      var x = document.forms["myForm"]["val1"].value;
+      var val1 = document.forms["myForm"]["val1"].value;
+
+
+      var val2 = document.forms["myForm"]["val2"].value;
+
 
       if (formValid == true) {
         calculate();
@@ -18,14 +22,24 @@
     function resetForm() {
       document.getElementById('myForm').reset();
       document.getElementById('answer').innerHTML = "";
+      clearCSS();
+    }
+
+    function clearCSS() {
+      document.getElementById('answer').style.fontSize  = "";
+      document.getElementById('answer').style.fontStyle = "";
+      document.getElementById('answer').style.textDecoration = "";
     }
 
     function calculate () {
+      clearCSS();
+
       var val1 = parseFloat(document.getElementById('val1').value);
       var val2 = parseFloat(document.getElementById('val2').value);
       var operator = document.getElementById('operator').value;
       var answer = 0;
 
+      //Do the math
       switch(operator) {
         case "add":
           answer = val1 + val2;
@@ -43,13 +57,36 @@
           answer = 0;
       }
 
+      //Change the formatting of the answer
+      if(document.getElementById('larger').checked == true) {
+        document.getElementById('answer').style.fontSize  = "200%";
+      }
+
+      if(document.getElementById('italic').checked == true) {
+        document.getElementById('answer').style.fontStyle = "italic";
+      }
+
+      if(document.getElementById('underline').checked == true) {
+        document.getElementById('answer').style.textDecoration = "underline";
+      }
+
+      //If we are using the previous answer save it to a variable so we can use it again
+      var persistGroup = document.getElementsByName('persist');
+      var selection;
+      for(var i=0; i<persistGroup.length; i++) {
+        if(persistGroup[i].checked) {
+          selection = persistGroup[i].value;
+        }
+
+      }
       //Clear the form
       document.getElementById('myForm').reset();
 
-      //If we are using the previous answer fill it in
-      if(document.getElementsByName('persist') == "true") {
+      //Add the old value to the textbox for use again
+      if(selection == "true") {
         document.getElementById('val1').value = answer;
       }
+      //Display the answer
 
       document.getElementById("answer").innerHTML = "Answer = " + answer;
     }
@@ -87,9 +124,9 @@
         </tr>
         <tr>
           <td colspan="3" style="text-align:center;">
-            <input type="checkbox" name="formatting" value="bold"/>Bold
-            <input type="checkbox" name="formatting" value="italic"/>Italic
-            <input type="checkbox" name="formatting" value="underline"/>Underline
+            <input type="checkbox" id="larger" value="10"/>Larger
+            <input type="checkbox" id="italic"/>Italic
+            <input type="checkbox" id="underline"/>Underline
           </td>
         </tr>
         <tr>
@@ -100,7 +137,7 @@
     <button type="button" onclick="validateForm()">Submit</button>
     <button type="button" onclick="resetForm()">Reset</button>
     <br />
-    <h1 id="answer"></h1>
+    <h3 id="answer"></h3>
   </div>
 </body>
 </html>
