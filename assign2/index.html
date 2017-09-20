@@ -6,11 +6,11 @@
   <link href="../styles.css" type="text/css" rel="stylesheet" />
   <script>
     function validateForm() {
+      var formValid = true;
+
       var x = document.forms["myForm"]["val1"].value;
-      if (x == "") {
-        alert("Name must be filled out");
-      }
-      else {
+
+      if (formValid == true) {
         calculate();
       }
     }
@@ -41,6 +41,14 @@
           break;
         default:
           answer = 0;
+      }
+
+      //Clear the form
+      document.getElementById('myForm').reset();
+
+      //If we are using the previous answer fill it in
+      if(document.getElementsByName('persist') == "true") {
+        document.getElementById('val1').value = answer;
       }
 
       document.getElementById("answer").innerHTML = "Answer = " + answer;
