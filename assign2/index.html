@@ -5,31 +5,68 @@
   <meta charset="utf-8" />
   <link href="../styles.css" type="text/css" rel="stylesheet" />
   <script>
-    function calculate {
-      return 0;
+    function validateForm() {
+      var x = document.forms["myForm"]["val1"].value;
+      if (x == "") {
+        alert("Name must be filled out");
+      }
+      else {
+        calculate();
+      }
+    }
+
+    function resetForm() {
+      document.getElementById('myForm').reset();
+      document.getElementById('answer').innerHTML = "";
+    }
+
+    function calculate () {
+      var val1 = parseFloat(document.getElementById('val1').value);
+      var val2 = parseFloat(document.getElementById('val2').value);
+      var operator = document.getElementById('operator').value;
+      var answer = 0;
+
+      switch(operator) {
+        case "add":
+          answer = val1 + val2;
+          break;
+        case "subtract":
+          answer = val1 - val2;
+          break;
+        case "multiply":
+          answer = val1 * val2;
+          break;
+        case "divide":
+          answer = val1 / val2;
+          break;
+        default:
+          answer = 0;
+      }
+
+      document.getElementById("answer").innerHTML = "Answer = " + answer;
     }
   </script>
 </head>
-<body>
+<body id="testName">
   <h1 class="center">Christopher Kingdon</h1>
   <hr />
   <div class="menu"><a href="../index.html">Home</a></div>
   <hr />
   <div class="center">
     <h2>Calculator</h2>
-    <form class="form">
+    <form class="form" id="myForm" method="post">
       <table class="center">
         <tr>
-          <td><input type="text" name="val1" style="text-align:right;"/></td>
+          <td><input type="text" id="val1" style="text-align:right;"/></td>
           <td style="text-align:center;">
-            <select id="functions">
+            <select id="operator">
               <option value="add">+</option>
               <option value="subtract">-</option>
               <option value="multiply">*</option>
               <option value="divide">/</option>
             </select>
           </td>
-          <td><input type="text" name="val2" /></td>
+          <td><input type="text" id="val2" /></td>
         </tr>
         <tr>
           <td colspan="3" style="text-align:center;">Do another calculation? (With answer from this one)</td>
@@ -48,10 +85,14 @@
           </td>
         </tr>
         <tr>
-          <td colspan="3" style="text-align:center;"><input type="submit" name="submit" onclick="calculate()" style="margin-right:5px;"/><input type="submit" name="reset" value="Clear" /></td>
+          <td colspan="3" style="text-align:center;"></td>
         </tr>
       </table>
     </form>
+    <button type="button" onclick="validateForm()">Submit</button>
+    <button type="button" onclick="resetForm()">Reset</button>
+    <br />
+    <h1 id="answer"></h1>
   </div>
 </body>
 </html>
