@@ -6,13 +6,24 @@
   <link href="../styles.css" type="text/css" rel="stylesheet" />
   <script>
     function validateForm() {
+      //Clear validation info
+      document.getElementById('Error1').innerHTML = "";
+      document.getElementById('Error2').innerHTML = "";
+
       var formValid = true;
 
       var val1 = document.forms["myForm"]["val1"].value;
-
-
       var val2 = document.forms["myForm"]["val2"].value;
 
+      if (val1 == "") {
+        formValid = false;
+        document.getElementById('Error1').innerHTML = "<div style=\"color:red; font-size:10pt\">*Please enter a valid number</div>";
+      }
+
+      if (val2 == "") {
+        formValid = false;
+        document.getElementById('Error2').innerHTML = "<div style=\"color:red; font-size:10pt\">*Please enter a valid number";
+      }
 
       if (formValid == true) {
         calculate();
@@ -22,6 +33,10 @@
     function resetForm() {
       document.getElementById('myForm').reset();
       document.getElementById('answer').innerHTML = "";
+
+      //Clear validation info
+      document.getElementById('Error1').innerHTML = "";
+      document.getElementById('Error2').innerHTML = "";
       clearCSS();
     }
 
@@ -102,6 +117,11 @@
     <form class="form" id="myForm" method="post">
       <table class="center">
         <tr>
+          <td id="Error1"></td>
+          <td></td>
+          <td id="Error2"></td>
+        </tr>
+        <tr>
           <td><input type="text" id="val1" style="text-align:right;"/></td>
           <td style="text-align:center;">
             <select id="operator">
@@ -138,6 +158,12 @@
     <button type="button" onclick="resetForm()">Reset</button>
     <br />
     <h3 id="answer"></h3>
+    <br />
+    <h1>Instructions</h1>
+    <p>This form is a simple calculator that can add any two floating point numbers. To use enter a number in each field and then select the operation.<br />
+      You want to perform using the drop down. If you would like to reuse the answer to do another calculation you can select yes and it will autofill <br />
+      you answer in the first field. Finally you can format the output for ease of viewing. A flowchart of the program logic can be found here: <a href="flowchart.html">Flowchart</a><br />
+    </p>
   </div>
 </body>
 </html>
