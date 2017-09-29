@@ -19,7 +19,6 @@ function findMedian(array) {
   var newArray = array.slice();
   var median = 0;
   newArray.sort(sortNumber);
-  console.log(newArray);
   if(newArray.length % 2 == 0) {
     var midLocation = (newArray.length / 2) - 1;
     var midVal1 = newArray[midLocation];
@@ -33,7 +32,7 @@ function findMedian(array) {
 }
 
 function findMode(array) {
-  var numberMap = {}; //Formatted as numberMap[number] = number of occurances
+  var numberMap = {}; //Formatted as numberMap[number] = number of occurances (we are basically using a hashmap)
   var modes = {}; //A list of the mods (for multimode condition)
   var currentModeNum = 0; //Currently the number of occurances of a number is 0
 
@@ -46,8 +45,6 @@ function findMode(array) {
       //If the number has NOT occured before set its count to 1
       numberMap[array[i]] = 1;
     }//end if/else
-
-    //console.log(numberMap);
 
     //Check if we have a new or same mode
     if(numberMap[array[i]] > currentModeNum) {
