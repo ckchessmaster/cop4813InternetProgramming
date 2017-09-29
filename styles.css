@@ -83,3 +83,14 @@ a:hover {
 input {
 
 }
+
+.fixedTable {
+  border: 1px solid white;
+  table-layout: fixed;
+  width: 200px;
+}
+
+.fixedTable th, td {
+  border: 1px solid white;
+  width: 100px;
+}

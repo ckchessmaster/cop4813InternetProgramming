@@ -4,7 +4,24 @@
   <title>Form</title>
   <meta charset="utf-8" />
   <link href="../styles.css" type="text/css" rel="stylesheet" />
+  <script>
+    function calculate() {
+      //Get the data and make it into an array
+      var rawText = document.getElementById('data').value;
+      var delimeters = [' ', '\n', ',']
+      var numbers = rawText.split(/\n|\t| |,/);
 
+      //Convert the text array into a number array
+      for(var i=0; i<textArray.length; i++) {
+        textArray[i] = parseFloat(textArray[i]);
+      }
+
+      //Do some math!
+
+      //Print the results
+
+    }
+  </script>
 </head>
 <body id="testName">
   <h1 class="center">Christopher Kingdon</h1>
@@ -12,7 +29,46 @@
   <div class="menu"><a href="../index.html">Home</a></div>
   <hr />
   <div class="center">
-    
+    <form class="form" id="statsForm" method="post">
+
+    </form>
+
+    <h4>Paste Data below:</h4>
+    <textarea id="data" form="statsForm"></textarea>
+    <br />
+    <button type="button" onClick="calculate()">Submit</button>
+    <br />
+    <br />
+    <table class="center fixedTable">
+      <tr>
+        <th>Mean:</th>
+        <td id="mean"></td>
+      </tr>
+      <tr>
+        <th>Median:</th>
+        <td id="median"></td>
+      </tr>
+      <tr>
+        <th>Count:</th>
+        <td id="count"></td>
+      </tr>
+      <tr>
+        <th>Summation:</th>
+        <td id="summation"></td>
+      </tr>
+      <tr>
+        <th>Mode:</th>
+        <td id="mode"></td>
+      </tr>
+      <tr>
+        <th>Variance:</th>
+        <td id="varience"></td>
+      </tr>
+      <tr>
+        <th>Standard Deviation:</th>
+        <td id="stdDev"></td>
+      </tr>
+    </table>
   </div>
 </body>
 </html>
