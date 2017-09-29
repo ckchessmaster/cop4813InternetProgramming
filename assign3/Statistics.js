@@ -19,12 +19,14 @@ function findMedian(array) {
   var newArray = array.slice();
   var median = 0;
   newArray.sort(sortNumber);
+  console.log(newArray);
   if(newArray.length % 2 == 0) {
-    var midVal1 = newArray[newArray.length / 2];
-    var midVal2 = newArray[(newArray.length / 2) + 1];
+    var midLocation = (newArray.length / 2) - 1;
+    var midVal1 = newArray[midLocation];
+    var midVal2 = newArray[(midLocation) + 1];
     median = (midVal1 + midVal2) / 2;
   } else {
-    median = newArray[newArray.length / 2];
+    median = newArray[Math.round(newArray.length / 2) - 1];
   }
 
   return Math.round(median * 100) / 100;;
@@ -35,23 +37,25 @@ function findMode(array) {
   var modes = {}; //A list of the mods (for multimode condition)
   var currentModeNum = 0; //Currently the number of occurances of a number is 0
 
-  for(var number in array) {
+  for(var i in array) {
     //Check if the number has occured before
-    if (number in numberMap) {
+    if (array[i] in numberMap) {
       //If the number has occured before increment its count
-      numberMap[number] = numberMap[number] + 1;
+      numberMap[array[i]] = numberMap[array[i]] + 1;
     } else {
       //If the number has NOT occured before set its count to 1
-      numberMap[number] = 1;
+      numberMap[array[i]] = 1;
     }//end if/else
 
+    //console.log(numberMap);
+
     //Check if we have a new or same mode
-    if(numberMap[number] > currentModeNum) {
+    if(numberMap[array[i]] > currentModeNum) {
       //Reset modes and set currentModeNum
-      modes = [number];
-      currentModeNum = numberMap[number];
-    } else if (numberMap[number] == currentModeNum) {
-      modes.push(number);
+      modes = [array[i]];
+      currentModeNum = numberMap[array[i]];
+    } else if (numberMap[array[i]] == currentModeNum) {
+      modes.push(array[i]);
     }//end if/else
   }//end for
 
@@ -65,11 +69,8 @@ function findVariance(array) {
 
   //Now subtract each number from the mean and square it
   for (var i in newArray) {
-    console.log(newArray[i]);
     newArray[i] = Math.pow((newArray[i] - mean), 2);
-    console.log(newArray[i]);
   }
-  console.log(newArray);
 
   //Find the sum of these numbers
   var sum = findSum(newArray);
