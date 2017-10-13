@@ -4,7 +4,9 @@ var lightUnlit = new Image();
 var lightSwitch = new Image();
 
 function init() {
-  canvas = $('#mainCanvas')[0].getContext("2d");
+  canvas = $('#mainCanvas')[0];
+  context = canvas.getContext("2d");
+  canvas.addEventListener("click", onCanvasClick, false);
 
   // load all images before continuing
   var loader = new PxLoader(),
@@ -17,41 +19,43 @@ function init() {
     this.light = light;
     this.lightUnlit = lightUnlit;
     this.lightSwitch = lightSwitch;
-    run(canvas);
+    run(context);
   });
   loader.start();
-}
+}//end init
 
-function run(canvas) {
+function run(context) {
   // draw the images
-  canvas.drawImage(battery, 0, 190, 200,200);
-  canvas.drawImage(lightUnlit, 750, 195, 200, 200);
+  context.drawImage(battery, 0, 190, 200,200);
+  context.drawImage(lightUnlit, 750, 195, 200, 200);
 
   // clip the image so that we get just the switch we want
-  canvas.drawImage(lightSwitch, 0, 0, 294, 294,  440, 100, 100, 100);
+  context.drawImage(lightSwitch, 0, 0, 294, 294, 390, 100, 100, 100);
 
-  //canvas.drawImage(lightSwitch, 0, 294, 294, 294,  440, 100, 100, 100);
-  //canvas.drawImage(lightSwitch, 0, 588, 294, 294,  440, 100, 100, 100);
+  //context.drawImage(lightSwitch, 0, 294, 294, 294,  440, 100, 100, 100);
+  //context.drawImage(lightSwitch, 0, 588, 294, 294,  440, 100, 100, 100);
 
   // draw the wires
-  //drawLine(490,0, 490,600);
-  //drawLine(0,290, 1000,290);
-}
+  drawLine(100, 230, 100, 140);
+  drawLine(100, 145, 400, 145);
+  drawLine(490, 145, 740, 145);
+  drawLine(740, 140, 740, 280);
+  drawLine(740, 275, 760, 275);
+  drawLine(760, 309, 740, 309);
+  drawLine(740, 304, 740, 440);
+  drawLine(100, 435, 740, 435);
+  drawLine(100, 350, 100, 440);
+}//end run
 
 function drawLine(startX, startY, endX, endY) {
-  canvas.strokeStyle = 'white';
-  canvas.lineWidth = 10;
+  context.strokeStyle = 'white';
+  context.lineWidth = 10;
 
-  canvas.moveTo(startX, startY);
-  canvas.lineTo(endX, endY);
-  canvas.stroke();
-}
+  context.moveTo(startX, startY);
+  context.lineTo(endX, endY);
+  context.stroke();
+}//end drawLine
 
-// rotate then draw image
-function rotateDrawImage(canvas, image, x, y, degrees, scale) {
-  canvas.save();
-  canvas.translate(x, y);
-  canvas.rotate((degrees*Math.PI)/180)
-  canvas.drawImage(image, 0, 0, scale, scale);
-  canvas.restore();
-}
+function onCanvasClick(e) {
+  console.log(e.PageX, e.PageY);
+}//end oncontextClick
