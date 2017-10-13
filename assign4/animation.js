@@ -14,44 +14,22 @@ function init() {
   canvas.addEventListener("click", onCanvasClick, false);
 
   // load all images before continuing
-  var loader = new PxLoader(),
-      battery = loader.addImage('../content/images/icon-power.png'),
-      light = loader.addImage('../content/images/light-bulb-lit.png'),
-      lightUnlit = loader.addImage('../content/images/light-bulb.png');
-      lightSwitch = loader.addImage('../content/images/Switch.png');
+  var loader = new PxLoader();
+  battery = loader.addImage('../content/images/icon-power.png');
+  light = loader.addImage('../content/images/light-bulb-lit.png');
+  lightUnlit = loader.addImage('../content/images/light-bulb.png');
+  lightSwitch = loader.addImage('../content/images/Switch.png');
+
   loader.addCompletionListener(function() {
-    this.battery = battery;
-    this.light = light;
-    this.lightUnlit = lightUnlit;
-    this.lightSwitch = lightSwitch;
-
-    // load sound manager
-    soundManager.url = 'soundmanager2/';
-    soundManager.useHighPerformance = true;
-    soundManager.flashLoadTimeout = 500;
-    soundManager.audioFormats.mp3.required = false;
-    soundManager.useHTML5Audio = true;
-    soundManager.preferFlash = false;
-    soundManager.reboot();
-
-    // add sounds to load
-
-
-    soundManager.onready(function() {
-
-
-      // start the animation
-      window.requestAnimationFrame(drawScreen);
-    });//end soundManager wait
+    // start the animation
+    window.requestAnimationFrame(drawScreen);
   });// end image loader wait
 
+  // start loading the images
   loader.start();
-
 }//end init
 
-//context.drawImage(lightSwitch, 0, 294, 294, 294,  440, 100, 100, 100);
-//
-
+// the main animation loop
 function drawScreen() {
   // clear screen
   context.clearRect(0, 0, 1000, 600);
@@ -60,7 +38,7 @@ function drawScreen() {
     context.drawImage(light, 750, 195, 200, 200);
   } else {
     context.drawImage(lightUnlit, 750, 195, 200, 200);
-  }
+  }//end light check
 
   // draw the wires
   if(batteryCharge < 100) {
@@ -102,7 +80,7 @@ function drawScreen() {
       context.fill();
       context.closePath();
     }//end segment 2
-  }
+  }//end energy flow for segments 1 & 2
 
   // these segments only turn on with switch
   if(isOn == true && batteryCharge < 100) {
@@ -191,7 +169,13 @@ function drawScreen() {
 
 function onMainSwitchClick() {
   isOn = !isOn;
+  var audio = new Audio('../content/sounds/deathscyp__breaker-1.wav');
+  audio.play();
 }//end onMainSwitchClick
+
+function recharge() {
+  batteryCharge = 0;
+}
 
 function drawLine(startX, startY, endX, endY, color = 'white') {
   // set to default color if nothing is specified
