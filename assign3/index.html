@@ -11,14 +11,14 @@
       //Get the data and make it into an array
       //var rawText = document.getElementById('data').value;
       var rawText = $("#data").val();
-      var delimeters = [' ', '\n', ',']
+      var delimeters = [' ', '\n', ','];
       var numbers = rawText.split(/\n|\t| |,/);
 
       //Convert the text array into a number array
       for(var i=0; i<numbers.length; i++) {
         numbers[i] = parseFloat(numbers[i]);
       }
-      
+
       //Do some math!
       $('#count').text(findN(numbers));
       $('#sum').text(findSum(numbers));
