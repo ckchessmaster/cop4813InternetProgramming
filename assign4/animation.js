@@ -24,19 +24,37 @@ function init() {
     this.light = light;
     this.lightUnlit = lightUnlit;
     this.lightSwitch = lightSwitch;
-    window.requestAnimationFrame(drawScreen);
-  });
+
+    // load sound manager
+    soundManager.url = 'soundmanager2/';
+    soundManager.useHighPerformance = true;
+    soundManager.flashLoadTimeout = 500;
+    soundManager.audioFormats.mp3.required = false;
+    soundManager.useHTML5Audio = true;
+    soundManager.preferFlash = false;
+    soundManager.reboot();
+
+    // add sounds to load
+
+
+    soundManager.onready(function() {
+
+
+      // start the animation
+      window.requestAnimationFrame(drawScreen);
+    });//end soundManager wait
+  });// end image loader wait
+
   loader.start();
+
 }//end init
 
 //context.drawImage(lightSwitch, 0, 294, 294, 294,  440, 100, 100, 100);
 //
 
 function drawScreen() {
+  // clear screen
   context.clearRect(0, 0, 1000, 600);
-
-  // draw the images
-
 
   if(isOn == true && batteryCharge < 100) {
     context.drawImage(light, 750, 195, 200, 200);
@@ -44,17 +62,12 @@ function drawScreen() {
     context.drawImage(lightUnlit, 750, 195, 200, 200);
   }
 
-  // clip the image so that we get just the switch we want
-  if(isOn == true) {
-    context.drawImage(lightSwitch, 0, 580, 294, 294,  390, 93, 100, 100);
-  } else {
-    context.drawImage(lightSwitch, 0, 0, 294, 294, 390, 100, 100, 100);
-  }
-
-
   // draw the wires
-  drawLine(100, 230, 100, 140, 'red'); // segment 1
-  drawLine(100, 145, 400, 145, 'red'); // segment 2
+  if(batteryCharge < 100) {
+    color = 'red';
+  }
+  drawLine(100, 230, 100, 140, color); // segment 1
+  drawLine(100, 145, 400, 145, color); // segment 2
 
   if(isOn == true && batteryCharge < 100) {
     color = 'red';
@@ -69,22 +82,82 @@ function drawScreen() {
   drawLine(740, 304, 740, 440, color); // segment 7
   drawLine(100, 435, 740, 435, color); // segment 8
   drawLine(100, 350, 100, 440, color); // segment 9
-  var offset = 0;
 
   /* draw the energy flow */
-  // segment 1
-  for(i=245 + offset; i>100; i-=50) {
-    context.beginPath();
-    context.arc(100, i, 10, 0, 2*Math.PI);
-    context.fillStyle = 'red';
-    context.fill();
-    context.closePath();
+  if(batteryCharge < 100) {
+    // segment 1
+    for(i=265 - currentFrame; i>145; i-=60) {
+      context.beginPath();
+      context.arc(100, i, 10, 0, 2*Math.PI);
+      context.fillStyle = 'red';
+      context.fill();
+      context.closePath();
+    }//end segment 1
+
+    // segment 2
+    for(i=100 + currentFrame; i<400; i+=60) {
+      context.beginPath();
+      context.arc(i, 145, 10, 0, 2*Math.PI);
+      context.fillStyle = 'red';
+      context.fill();
+      context.closePath();
+    }//end segment 2
   }
 
-  //context.beginPath();
-  //context.fillRect(75, 250, 50, 90);
-  //context.fillStyle = 'black';
-  //context.closePath();
+  // these segments only turn on with switch
+  if(isOn == true && batteryCharge < 100) {
+    // segment 3
+    for(i=440 + currentFrame; i<740; i+=60) {
+      context.beginPath();
+      context.arc(i, 145, 10, 0, 2*Math.PI);
+      context.fillStyle = 'red';
+      context.fill();
+      context.closePath();
+    }//end segment 2
+
+    // segment 4
+    for(i=145 + currentFrame; i<275; i+=60) {
+      context.beginPath();
+      context.arc(740, i, 10, 0, 2*Math.PI);
+      context.fillStyle = 'red';
+      context.fill();
+      context.closePath();
+    }//end segment 3
+
+    // segment 7
+    for(i=310 + currentFrame; i<435; i+=60) {
+      context.beginPath();
+      context.arc(740, i, 10, 0, 2*Math.PI);
+      context.fillStyle = 'red';
+      context.fill();
+      context.closePath();
+    }//end segment 7
+
+    // segment 8
+    for(i=740 - currentFrame; i>100; i-=60) {
+      context.beginPath();
+      context.arc(i, 435, 10, 0, 2*Math.PI);
+      context.fillStyle = 'red';
+      context.fill();
+      context.closePath();
+    }//end segment 8
+
+    // segment 9
+    for(i=435 - currentFrame; i>315; i-=60) {
+      context.beginPath();
+      context.arc(100, i, 10, 0, 2*Math.PI);
+      context.fillStyle = 'red';
+      context.fill();
+      context.closePath();
+    }//end segment 9
+  }//end energy flow
+
+  // clip the image so that we get just the switch we want
+  if(isOn == true) {
+    context.drawImage(lightSwitch, 0, 580, 294, 294,  390, 93, 100, 100);
+  } else {
+    context.drawImage(lightSwitch, 0, 0, 294, 294, 390, 100, 100, 100);
+  }
 
   /* draw the battery */
   // the background
