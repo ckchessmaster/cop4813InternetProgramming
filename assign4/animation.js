@@ -178,9 +178,6 @@ function recharge() {
 }
 
 function drawLine(startX, startY, endX, endY, color = 'white') {
-  // set to default color if nothing is specified
-  //color = color || 'white';
-
   context.strokeStyle = color;
   context.lineWidth = 10;
 
@@ -194,7 +191,6 @@ function drawLine(startX, startY, endX, endY, color = 'white') {
 // Determine where the user clicked and call the appropriate function
 function onCanvasClick(e) {
   var pos = getMousePos(canvas, e);
-  //console.log("Coordinates are: " + pos.x + " " + pos.y);
 
   if(pos.x > 390 && pos.x < 490 && pos.y > 100 && pos.y < 200) {
     onMainSwitchClick();
