@@ -27,7 +27,6 @@ function createUser() {
       }
     }//end while
     $password = password_hash($_GET["password"], 1);
-    echo $password;
     fwrite($users, $_GET["username"] . " " . $password . PHP_EOL);
     fclose($users);
   }

@@ -41,11 +41,13 @@ function validate() {
   // search for the matching username/password
   while(!feof($users)) {
     // split up the line and remove characters stored for file
-    $line = preg_replace('/[\x00-\x1F\x7F\xA0]/u', '',explode(" ", fgets($users)));
-    if($_GET["username"] == $line[0]) {
-      if(password_verify("Password123", $line[1])) {
+    $line = fgets($users);
+    $lineClean = rtrim($line);
+    $lineCleanSplit = explode(" ", $lineClean);
+    if($_GET["username"] == $lineCleanSplit[0]) {
+      if(password_verify($_GET["password"], $lineCleanSplit[1])) {
         $_SESSION["loggedIn"] = true;
-        $_SESSION["usernamae"] = $line[0];
+        $_SESSION["usernamae"] = $lineCleanSplit[0];
       } else {
         $_SESSION["loggedIn"] = false;
         //tell user login failed
