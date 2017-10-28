@@ -1,24 +1,30 @@
 <?php session_start(); ?>
 <?php include('../shared/header.html'); ?>
 <?php
+// have we tried to login but failed?
+$loginAttempt = false;
+
 if(isset($_GET["logout"])) {
   logout();
 }
 if(isset($_GET["username"]) && isset($_GET["password"])) {
-  validate();
+  $loginAttempt = validate();
 }//end isset
 if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
   displayServices();
 } else {
-  displayLogin();
+  displayLogin($loginAttempt);
 }//end loggedIn check
  ?>
 <?php include('../shared/footer.html'); ?>
 
 <?php
-function displayLogin() {
-  echo '<div class="container">
-  <form action="index.php">
+function displayLogin($loginAttempt) {
+  echo '<div class="container">';
+  if($loginAttempt) {
+    echo '<div class="alert alert-danger">Incorrect username or password.</div>';
+  }
+  echo '<form action="index.php">
   <div class="form-group">
     <label for="username">Username:</label>
     <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" />
@@ -35,7 +41,12 @@ function displayServices() {
   echo "Hello World!";
 }//end displayServices
 
+/* Validate user credentials */
 function validate() {
+  // start by setting loggedIn to false
+  $_SESSION["loggedIn"] = false;
+
+  // open file
   $users = fopen("users.txt", "r") or die("Unable to open file!");
 
   // search for the matching username/password
@@ -44,19 +55,26 @@ function validate() {
     $line = fgets($users);
     $lineClean = rtrim($line);
     $lineCleanSplit = explode(" ", $lineClean);
+
+    // check for username and then password
     if($_GET["username"] == $lineCleanSplit[0]) {
       if(password_verify($_GET["password"], $lineCleanSplit[1])) {
         $_SESSION["loggedIn"] = true;
         $_SESSION["usernamae"] = $lineCleanSplit[0];
-      } else {
-        $_SESSION["loggedIn"] = false;
-        //tell user login failed
+
+        // successful login
+        fclose($users);
+        return false;
       }//end password check
     }//end username check
-  }//end user search
+  }//end file search
+
+  // failed login
   fclose($users);
+  return true;
 }//end validate()
 
+/* Clear session to "logout" the user */
 function logout() {
   session_unset();
   session_destroy();
