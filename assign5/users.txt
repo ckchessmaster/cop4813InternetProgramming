@@ -1,1 +1,2 @@
-admin $2y$10$zitfxBYWxj7fI25S1OWI3usZFFkO21lRN.BzfKWap3NVgyeEfGaxq
+ckchessmaster $2y$10$B04bTDfdwh21SK0BvLSeneavEuPy4tbNy2qyfotEGUv3AJvxCM4/y
+admin $2y$10$vhirx0QD4WHh8USTdzZ1Huylwz.M7HF1owZZkqASkEOzKcC0/8kUS

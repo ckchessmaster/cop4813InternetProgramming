@@ -1,7 +1,10 @@
 <?php session_start(); ?>
 <?php include('../shared/header.html'); ?>
 <?php
-if(isset($_GET)) {
+if(isset($_GET["logout"])) {
+  logout();
+}
+if(isset($_GET["username"]) && isset($_GET["password"])) {
   validate();
 }//end isset
 if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
@@ -33,27 +36,27 @@ function displayServices() {
 }//end displayServices
 
 function validate() {
-  if(isset($_GET["username"]) && isset($_GET["password"])) {
-    $users = fopen("users.txt", "r") or die("Unable to open file!");
+  $users = fopen("users.txt", "r") or die("Unable to open file!");
 
-    // search for the matching username/password
-    while(!feof($users)) {
-      $line = explode(" ", fgets($users));
-      if($_GET["username"] == $line[0]) {
-        if(password_verify($_GET["password"], $line[1])) {
-          echo $line[0];
-          $_SESSION["loggedIn"] = true;
-          $_SESSION["usernamae"] = $line[0];
-        } else {
-          echo password_hash($_GET["password"]);
-          echo $line[1];
-          $_SESSION["loggedIn"] = false;
-          //tell user login failed
-        }//end password check
-      }//end username check
-    }//end user search
-
-    fclose($users);
-  }//end isset
+  // search for the matching username/password
+  while(!feof($users)) {
+    // split up the line and remove characters stored for file
+    $line = preg_replace('/[\x00-\x1F\x7F\xA0]/u', '',explode(" ", fgets($users)));
+    if($_GET["username"] == $line[0]) {
+      if(password_verify("Password123", $line[1])) {
+        $_SESSION["loggedIn"] = true;
+        $_SESSION["usernamae"] = $line[0];
+      } else {
+        $_SESSION["loggedIn"] = false;
+        //tell user login failed
+      }//end password check
+    }//end username check
+  }//end user search
+  fclose($users);
 }//end validate()
+
+function logout() {
+  session_unset();
+  session_destroy();
+}
  ?>
