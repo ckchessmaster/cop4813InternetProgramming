@@ -19,10 +19,16 @@
       <li><a href="../assign2/index.html">Assign2</a></li>
       <li><a href="../assign3/index.html">Assign3</a></li>
       <li><a href="../assign4/index.html">Assign4</a></li>
-      <li class="active"><a href="../assign5/index.html">Assign5</a></li>
+      <li><a href="../assign5/index.php">Assign5</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="../assign5/index.php?logout=true">Logout</a></li>
+      <?php
+      if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
+        echo '<li><a href="../assign5/index.php?logout=true">' . $_SESSION["username"] . ', Logout</a></li>';
+      } else {
+        echo '<li><a href="../assign5/index.php">Login</a></li>';
+      }//end loggedIn check
+      ?>
     </ul>
   </div>
 </nav>

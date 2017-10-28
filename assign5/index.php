@@ -1,15 +1,18 @@
 <?php session_start(); ?>
-<?php include('../shared/header.html'); ?>
 <?php
 // have we tried to login but failed?
 $loginAttempt = false;
 
 if(isset($_GET["logout"])) {
   logout();
-}
+}//end isset
 if(isset($_GET["username"]) && isset($_GET["password"])) {
   $loginAttempt = validate();
 }//end isset
+
+// display header
+include('../shared/header.php');
+
 if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
   displayServices();
 } else {
@@ -19,11 +22,13 @@ if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
 <?php include('../shared/footer.html'); ?>
 
 <?php
+/* Display the login prompt */
 function displayLogin($loginAttempt) {
   echo '<div class="container">';
+  // check if we have attempted to login
   if($loginAttempt) {
     echo '<div class="alert alert-danger">Incorrect username or password.</div>';
-  }
+  }//end loginAttempt check
   echo '<form action="index.php">
   <div class="form-group">
     <label for="username">Username:</label>
@@ -60,7 +65,7 @@ function validate() {
     if($_GET["username"] == $lineCleanSplit[0]) {
       if(password_verify($_GET["password"], $lineCleanSplit[1])) {
         $_SESSION["loggedIn"] = true;
-        $_SESSION["usernamae"] = $lineCleanSplit[0];
+        $_SESSION["username"] = $lineCleanSplit[0];
 
         // successful login
         fclose($users);
