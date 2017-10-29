@@ -1,2 +1,3 @@
 ckchessmaster $2y$10$rmCaCS2gYqYRonL0/8TbGug9TjR5CwoDxb84u4.POrv542JHbraSC
 admin $2y$10$ZJZdJyZJ.V.kHG0pfiq4Iu4f8qWdAKlb73MDjjAFIsbMFTPFRte4.
+Adrian $2y$10$5/HeZr4N3zm/292ZmqPsbOpB2UUSZr9.nEcXSJRUbJ5HsrxaEjL.W
