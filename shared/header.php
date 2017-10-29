@@ -7,8 +7,8 @@
   <script src="../lib/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-<h1 class="text-center">Christopher Kingdon</h1>
-<nav class="navbar navbar-default">
+<h1 class="text-center">Christopher Kingdon ePortfolio</h1>
+<nav class="navbar navbar-custom">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="../index.html">ePortfolio</a>
@@ -26,7 +26,7 @@
       if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
         echo '<li><a href="../assign5/index.php?logout=true">' . $_SESSION["username"] . ', Logout</a></li>';
       } else {
-        echo '<li><a href="../assign5/index.php">Login</a></li>';
+        echo '<li><a href="../assign5/index.php?logout">Login</a></li>';
       }//end loggedIn check
       ?>
     </ul>

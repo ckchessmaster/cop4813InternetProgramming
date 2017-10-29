@@ -4,77 +4,95 @@ body {
   color:white;
 }
 
+.equal {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.vcenter {
+  display:flex;
+  justify-content:center;
+  align-items: center;
+  flex-flow: column;
+}
+
 /* Adjust the default bootstrap */
-.navbar-default {
+/* Create custom navbar */
+.navbar-custom {
   background-color: #808080;
   border-color: #ffa500;
 }
-.navbar-default .navbar-brand {
+.navbar-custom .navbar-brand {
   color: #ffa500;
 }
-.navbar-default .navbar-brand:hover,
-.navbar-default .navbar-brand:focus {
+.navbar-custom .navbar-brand:hover,
+.navbar-custom .navbar-brand:focus {
   color: #ffffff;
 }
-.navbar-default .navbar-text {
+.navbar-custom .navbar-text {
   color: #ffa500;
 }
-.navbar-default .navbar-nav > li > a {
+.navbar-custom .navbar-nav > li > a {
   color: #ffa500;
 }
-.navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav > li > a:focus {
-  color: #ffffff;
-}
-.navbar-default .navbar-nav > .active > a,
-.navbar-default .navbar-nav > .active > a:hover,
-.navbar-default .navbar-nav > .active > a:focus {
+.navbar-custom .navbar-nav > li > a:hover,
+.navbar-custom .navbar-nav > li > a:focus {
   color: #ffffff;
   background-color: #ffa500;
 }
-.navbar-default .navbar-nav > .open > a,
-.navbar-default .navbar-nav > .open > a:hover,
-.navbar-default .navbar-nav > .open > a:focus {
+
+.navbar-custom .navbar-nav > .active > a,
+.navbar-custom .navbar-nav > .active > a:hover,
+.navbar-custom .navbar-nav > .active > a:focus {
   color: #ffffff;
   background-color: #ffa500;
 }
-.navbar-default .navbar-toggle {
+.navbar-custom .navbar-nav > .open > a,
+.navbar-custom .navbar-nav > .open > a:hover,
+.navbar-custom .navbar-nav > .open > a:focus {
+  color: #ffffff;
+  background-color: #ffa500;
+}
+.navbar-custom .navbar-toggle {
   border-color: #ffa500;
 }
-.navbar-default .navbar-toggle:hover,
-.navbar-default .navbar-toggle:focus {
+.navbar-custom .navbar-toggle:hover,
+.navbar-custom .navbar-toggle:focus {
   background-color: #ffa500;
 }
-.navbar-default .navbar-toggle .icon-bar {
+.navbar-custom .navbar-toggle .icon-bar {
   background-color: #ffa500;
 }
-.navbar-default .navbar-collapse,
-.navbar-default .navbar-form {
+.navbar-custom .navbar-collapse,
+.navbar-custom .navbar-form {
   border-color: #ffa500;
 }
-.navbar-default .navbar-link {
+.navbar-custom .navbar-link {
   color: #ffa500;
 }
-.navbar-default .navbar-link:hover {
+.navbar-custom .navbar-link:hover {
   color: #ffffff;
 }
 
+.navbar-custom .navbar-
+
 @media (max-width: 767px) {
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+  .navbar-custom .navbar-nav .open .dropdown-menu > li > a {
     color: #ffa500;
   }
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+  .navbar-custom .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-custom .navbar-nav .open .dropdown-menu > li > a:focus {
     color: #ffffff;
   }
-  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
-  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
-  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+  .navbar-custom .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-custom .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-custom .navbar-nav .open .dropdown-menu > .active > a:focus {
     color: #ffffff;
     background-color: #ffa500;
   }
 }
 
+/* Create custom button */
 .btn-custom {
   color: #ffffff;
   background-color: #808080;

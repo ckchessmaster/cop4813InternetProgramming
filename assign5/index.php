@@ -10,12 +10,12 @@ if(isset($_GET["username"]) && isset($_GET["password"])) {
   $loginAttempt = validate();
 }//end isset
 
-// display header
-include('../shared/header.php');
-
 if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
-  displayServices();
+  header('Location: admin.php');
+  exit();
 } else {
+  // display header
+  include('../shared/header.php');
   displayLogin($loginAttempt);
 }//end loggedIn check
  ?>
@@ -41,10 +41,6 @@ function displayLogin($loginAttempt) {
   <button type="submit" class="btn btn-custom">Log In</button>
   </form></div>';
 }//end displayLogin
-
-function displayServices() {
-  echo "Hello World!";
-}//end displayServices
 
 /* Validate user credentials */
 function validate() {
