@@ -10,6 +10,20 @@ init();
 // display header
 include('../shared/header.php');
 ?>
+<script>
+function addShares() {
+  window.location = "add.php";
+}
+
+function deleteStock(stock) {
+  console.log("deleting:" + stock);
+  window.location = "delete.php?stock=" + stock;
+}
+
+function modifyStock(stock) {
+  window.location = "modify.php?stock=" + stock;
+}
+</script>
 <div class="container container-fluid">
   <div class="row">
     <div class="col-lg-12"><?php echo '<h2>Welcome ' . $_SESSION["username"] . '!</h2>' ?></div>
@@ -41,10 +55,10 @@ include('../shared/header.php');
     <div class="col-lg-12"><h3>Total Value: $<?php echo number_format($grandTotal, 2); ?></h3></div>
   </div>
   <div class="row">
-    <div class="col-lg-1"><button class="btn btn-custom">Add Shares</button></div>
+    <div class="col-lg-1"><button type="button" class="btn btn-custom" onclick="addShares()">Add Shares</button></div>
   </div>
 </div>
-
+<?php include('../shared/footer.html'); ?>
 <?php
 /* Setup for user portfolio */
 function init() {
@@ -72,8 +86,8 @@ function displayPortfolio() {
         <th>' . number_format($pLine[1]) .'</th>
         <th>$' . number_format($oLine[2], 2) .'</th>
         <th>$' . number_format($oLine[2] * $pLine[1], 2) .'</th>
-        <th><button type="button" class="btn btn-custom" action="modify.php?val=' . $pLine[0] . '">Modify</button></th>
-        <th><button type="button" class="btn btn-custom" action="delete.php?val=' . $pLine[0] . '">Delete</button></th>
+        <th><button type="button" class="btn btn-custom" onclick="modifyStock(\'' . $pLine[0] . '\')">Modify</button></th>
+        <th><button type="button" class="btn btn-custom" onclick="deleteStock(\'' . $pLine[0] . '\')">Delete</button></th>
       </tr>';
 
       // add line to grand total
