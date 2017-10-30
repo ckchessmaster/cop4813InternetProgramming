@@ -76,7 +76,8 @@ function displayPortfolio() {
     // split up the line and remove characters stored for file
     $pLine = explode(" ", rtrim(fgets($portfolio)));
     $open = fopen("http://finance.yahoo.com/d/quotes.csv?s=" . $pLine[0] . "&f=snl1&e=.csv", "r") or die("Unable to open link!");
-    $oLine = explode(",", rtrim(fgets($open)));
+    //$oLine = explode(",", rtrim(fgets($open)));
+    $oLine = fgetcsv($open, 1000, ",");
 
     // create the line
     if(!$pLine[0] == "") {
