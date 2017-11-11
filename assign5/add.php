@@ -43,6 +43,8 @@ if(isset($_GET["stock"]) && isset($_GET["shares"])) {
 
 // display header
 include('../shared/header.php');
+echo '</echo>'
+include('../shared/menu.php')
 ?>
 <!-- Still need validation -->
 <div class="container container-fluid">
