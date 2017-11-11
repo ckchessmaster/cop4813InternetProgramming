@@ -15,7 +15,9 @@ if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
   exit();
 } else {
   // display header
-  include('../shared/header.php');
+  include('../shared/header.html');
+  echo '</head>';
+  include('../shared/menu.php');
   displayLogin($loginAttempt);
 }//end loggedIn check
  ?>

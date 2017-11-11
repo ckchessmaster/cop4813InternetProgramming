@@ -1,11 +1,3 @@
-<html>
-<head>
-  <title>Form</title>
-  <meta charset="utf-8" />
-  <link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="../styles.css" type="text/css" rel="stylesheet" />
-  <script src="../lib/jquery-3.2.1.min.js"></script>
-</head>
 <body>
 <h1 class="text-center">Christopher Kingdon ePortfolio</h1>
 <nav class="navbar navbar-custom">
@@ -20,6 +12,7 @@
       <li><a href="../assign3/index.html">Assign3</a></li>
       <li><a href="../assign4/index.html">Assign4</a></li>
       <li><a href="../assign5/index.php">Assign5</a></li>
+      <li><a href="../assign6/index.php">Assign6</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <?php

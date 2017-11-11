@@ -8,7 +8,9 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] == false) {
 init();
 
 // display header
-include('../shared/header.php');
+include('../shared/header.html');
+echo '</head>';
+include('../shared/menu.php');
 ?>
 <script>
 function addShares() {
