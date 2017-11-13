@@ -20,6 +20,9 @@ function editOrder(id) {
   <div class="row">
     <div class="col-lg-12"><h2>Welcome!</h2></div>
   </div>
+  <div class="row">
+    <div class="col-lg-12"><p>The ERD diagram can be found <a href="../content/images/ERD.png">here</a></p></div>
+  </div>
   <div class="row equal">
     <div class="col-md-4"><h3>Your active orders:</h3></div>
   </div>
