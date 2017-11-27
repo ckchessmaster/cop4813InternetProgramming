@@ -4,6 +4,14 @@ body {
   color:white;
 }
 
+select {
+  color:black;
+}
+
+input {
+  color:black;
+}
+
 .equal {
   display: flex;
   flex-flow: row wrap;

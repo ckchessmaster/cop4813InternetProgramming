@@ -1,7 +1,5 @@
-<?php session_start(); ?>
-<?php include('../shared/header.html'); ?>
-</head>
-<?php include('../shared/menu.php'); ?>
+<?php session_start();
+include('../shared/header.html'); ?>
 <script>
 function addOrder() {
   window.location = "manageOrders.php?function=add";
@@ -14,7 +12,26 @@ function cancelOrder(id) {
 function editOrder(id) {
   window.location = "manageOrders.php?function=edit&id=" . $id;
 }
+function changeFilter() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange  = function() {
+    if(xhttp.readyState == 4) {
+      $("#data").html(xhttp.responseText);
+    }
+  };
+
+  var tickerFilter = $("#ticker").val();
+  var nameFilter = $("#name").val();
+  var typeFilter = $("#orderType").val();
+  var params = "tickF=" + tickerFilter + "&nameF=" + nameFilter + "&typeF=" + typeFilter;
+  console.log(params);
+
+  xhttp.open("GET", "dataManager.php?" + params, true);
+  xhttp.send();
+}
 </script>
+</head>
+<?php include('../shared/menu.php'); ?>
 <div class="container container-fluid">
   <div class="row">
     <div class="col-lg-12"><h2>Welcome!</h2></div>
@@ -36,48 +53,31 @@ function editOrder(id) {
             <th></th>
             <th></th>
           </tr>
+          <tr>
+            <th><input id="ticker" type="text" oninput="changeFilter()" style="width:70px"/></th>
+            <th><input id="name" type="text" oninput="changeFilter()" style="width:200px"/></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th><select id="orderType" onChange="changeFilter()">
+              <option value="none">None</option>
+              <option value="buy">BUY</option>
+              <option value="sell">SELL</option>
+            </select></th>
+            <th><------</th>
+            <th>Filter By</th>
+          </tr>
         </thead>
-        <tbody>
-          <?php displayOrders(); ?>
+        <tbody id="data" name="data">
+          <?php include('dataManager.php'); ?>
         </tbody>
       </table>
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-1"><button type="button" class="btn btn-custom" onclick="addOrder()">Add Order</button></div>
+    <div class="col-lg-1"><button type="button" class="btn btn-custom" onclick="changeFilter()">Add Order</button></div>
   </div>
 </div>
 <?php include('../shared/footer.html'); ?>
 <?php
-function displayOrders() {
-  $servername = "192.168.1.98:3306";
-  $username = "ckingdon";
-  $password = "dxgBDmvja45!";
-  $dbname = "n00827188";
-
-  try {
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    $sql = "SELECT * FROM StockExchange";
-    $result = $conn->query($sql);
-
-    foreach($result as $row) {
-      echo '<tr>
-        <td>'.$row["StockType"].'</td>
-        <td>'.$row["Name"].'</td>
-        <td>'.$row["Quantity"].'</td>
-        <td>'.$row["Price"].'</td>
-        <td>'.$row["DateAdded"].'</td>
-        <td>'.$row["OrderType"].'</td>
-        <td><button type="button" class="btn btn-custom" onclick="editOrder(\'' . $row["idStockExchange"] . '\')">Edit</button></td>
-        <td><button type="button" class="btn btn-custom" onclick="cancelOrder(\'' . $row["idStockExchange"] . '\')">Cancel</button></td>
-      </tr>';
-    }
-
-  } catch(PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
-  }
-}
 ?>
