@@ -2,16 +2,18 @@
 include('../shared/header.html'); ?>
 <script>
 function addOrder() {
-  window.location = "manageOrders.php?function=add";
+  window.location = "../assign6/manageOrders.php?function=add";
 }
 
 function cancelOrder(id) {
-  window.location = "manageOrders.php?function=cancel&id=" . $id;
+  window.location = "../assign6/manageOrders.php?function=cancel&id=" . $id;
 }
 
 function editOrder(id) {
-  window.location = "manageOrders.php?function=edit&id=" . $id;
+  console.log("test");
+  window.location = "../assign6/manageOrders.php?function=edit&id=" . $id;
 }
+
 function changeFilter() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange  = function() {
@@ -75,7 +77,7 @@ function changeFilter() {
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-1"><button type="button" class="btn btn-custom" onclick="changeFilter()">Add Order</button></div>
+    <div class="col-lg-1"><button type="button" class="btn btn-custom" onclick="addOrder()">Add Order</button></div>
   </div>
 </div>
 <?php include('../shared/footer.html'); ?>
